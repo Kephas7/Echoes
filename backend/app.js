@@ -2,6 +2,8 @@ const express = require('express');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const authRoutes = require('./routes/authRoutes');
+const productRoutes = require('./routes/productRoutes');
+
 
 dotenv.config();
 
@@ -10,7 +12,9 @@ app.use(cors());
 app.use(express.json());
 
 // Authentication routes
-const productRoutes = require('./routes/productRoutes');
+
+app.use('/api/auth', authRoutes);
+
 app.use('/api/products', productRoutes);
 
 // Root route for testing
