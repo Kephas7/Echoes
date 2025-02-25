@@ -1,3 +1,30 @@
+nav {
+    background: #333;
+    padding: 10px;
+    margin-bottom: 20px;
+  }
+  
+  nav a {
+    color: #fff;
+    margin-right: 15px;
+    text-decoration: none;
+  }
+  
+  nav a:hover {
+    text-decoration: underline;
+  }
+  
+  nav button {
+    background: #ff4d4d;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  
+  nav button:hover {
+    background: #cc0000;
+  }
 body {
     font-family: Arial, sans-serif;
     margin: 0;

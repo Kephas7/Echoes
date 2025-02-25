@@ -7,12 +7,14 @@ import ProductDetails from './components/ProductDetails';
 import Login from './components/Login';
 import Register from './components/Register';
 import ProtectedRoute from './components/ProtectedRoute';
+import Navbar from './components/Navbar';
 import './styles/App.css';
 
 const App = () => {
   return (
     <AuthProvider>
       <Router>
+        <Navbar />
         <div className="container">
           <Routes>
             <Route path="/" element={<ProductList />} />
