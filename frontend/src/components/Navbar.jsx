@@ -1,5 +1,4 @@
-import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
 const Navbar = () => {
@@ -17,6 +16,7 @@ const Navbar = () => {
       {token ? (
         <>
           <Link to="/add-product">Add Product</Link>
+          <Link to="/cart">Cart</Link> {/* Add Cart link */}
           <button onClick={handleLogout}>Logout</button>
         </>
       ) : (
