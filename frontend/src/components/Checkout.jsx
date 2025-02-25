@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { useCart } from '../context/CartContext';
+import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const Checkout = () => {
   const { cart, clearCart } = useCart();
+  const { token } = useAuth();
   const navigate = useNavigate();
   const [shippingDetails, setShippingDetails] = useState({
     name: '',
@@ -23,18 +26,26 @@ const Checkout = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Simulate order placement (replace with actual API call)
-    const order = {
-      shippingDetails,
-      items: cart,
-      totalPrice,
-    };
+    try {
+      const order = {
+        userId: token, // Assuming the token contains the user ID
+        totalAmount: totalPrice,
+        shippingAddress: JSON.stringify(shippingDetails),
+        items: cart,
+      };
 
-    console.log('Order placed:', order);
+      // Send the order to the backend
+      const response = await axios.post('http://localhost:5000/api/orders', order, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
 
-    // Clear the cart and redirect to a confirmation page
-    clearCart();
-    navigate('/order-confirmation');
+      // Clear the cart and redirect to the confirmation page
+      clearCart();
+      navigate('/order-confirmation');
+    } catch (err) {
+      console.error(err);
+      alert('Failed to place order');
+    }
   };
 
   return (

@@ -1,14 +1,17 @@
 const express = require('express');
-const { getProducts, getProduct, createProduct } = require('../controllers/productController');
+const { getProducts, getProduct, createProduct, updateProduct, deleteProduct } = require('../controllers/productController');
+const authMiddleware = require('../middleware/authMiddleware');
+const adminMiddleware = require('../middleware/adminMiddleware');
+const upload = require('../middleware/upload'); // Import the upload middleware
 const router = express.Router();
 
-// GET all products
+// Public routes
 router.get('/', getProducts);
-
-// GET a single product by ID
 router.get('/:id', getProduct);
 
-// POST a new product
-router.post('/', createProduct);
+// Admin-only routes
+router.post('/', authMiddleware, adminMiddleware, upload.single('image'), createProduct); // Handle single file upload
+router.put('/:id', authMiddleware, adminMiddleware, upload.single('image'), updateProduct); // Handle single file upload
+router.delete('/:id', authMiddleware, adminMiddleware, deleteProduct);
 
 module.exports = router;

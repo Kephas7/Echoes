@@ -10,7 +10,9 @@ import Register from './components/Register';
 import ProtectedRoute from './components/ProtectedRoute';
 import Navbar from './components/Navbar';
 import Cart from './components/Cart';
+import Checkout from './components/Checkout'; // Import Checkout
 import './styles/App.css';
+
 
 const App = () => {
   return (
@@ -22,6 +24,7 @@ const App = () => {
             <Routes>
               <Route path="/" element={<ProductList />} />
               <Route path="/cart" element={<Cart />} />
+              <Route path="/checkout" element={<Checkout />} /> {/* Add Checkout route */}
               <Route
                 path="/add-product"
                 element={
@@ -40,5 +43,4 @@ const App = () => {
     </AuthProvider>
   );
 };
-
 export default App; // Ensure this line is present

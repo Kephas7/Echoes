@@ -1,15 +1,16 @@
+// authRoutes.js
 const express = require('express');
-const { register, login } = require('../controllers/authController');
+const { register, login, getUsers, deleteUser } = require('../controllers/authController');
+const authMiddleware = require('../middleware/authMiddleware');
+const adminMiddleware = require('../middleware/adminMiddleware');
 const router = express.Router();
 
-// @route   POST /api/auth/register
-// @desc    Register a new user
-// @access  Public
+// Public routes
 router.post('/register', register);
-
-// @route   POST /api/auth/login
-// @desc    Login a user
-// @access  Public
 router.post('/login', login);
+
+// Admin-only routes
+router.get('/users', authMiddleware, adminMiddleware, getUsers);
+router.delete('/users/:id', authMiddleware, adminMiddleware, deleteUser);
 
 module.exports = router;
