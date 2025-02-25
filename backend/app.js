@@ -1,27 +1,19 @@
 const express = require('express');
-const dotenv = require('dotenv');
-const cors = require('cors');
-const authRoutes = require('./routes/authRoutes');
-const productRoutes = require('./routes/productRoutes');
-
-
-dotenv.config();
-
+const cors = require('cors'); // Import cors
 const app = express();
-app.use(cors());
+
+// Middleware
+app.use(cors()); // Enable CORS
 app.use(express.json());
 
-// Authentication routes
-
+// Routes
+const authRoutes = require('./routes/authRoutes');
+const productRoutes = require('./routes/productRoutes');
 app.use('/api/auth', authRoutes);
-
 app.use('/api/products', productRoutes);
 
-// Root route for testing
-app.get('/', (req, res) => {
-  res.send('Welcome to the backend API!');
-});
-
-// Set the port
+// Start the server
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});

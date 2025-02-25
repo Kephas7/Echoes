@@ -1,13 +1,14 @@
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate
 import { useAuth } from '../context/AuthContext';
 
 const Navbar = () => {
   const { token, logout } = useAuth();
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // Use the useNavigate hook
 
   const handleLogout = () => {
     logout();
-    navigate('/login');
+    navigate('/login'); // Redirect to the login page after logout
   };
 
   return (
@@ -16,7 +17,7 @@ const Navbar = () => {
       {token ? (
         <>
           <Link to="/add-product">Add Product</Link>
-          <Link to="/cart">Cart</Link> {/* Add Cart link */}
+          <Link to="/cart">Cart</Link>
           <button onClick={handleLogout}>Logout</button>
         </>
       ) : (
