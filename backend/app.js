@@ -10,7 +10,8 @@ app.use(cors());
 app.use(express.json());
 
 // Authentication routes
-app.use('/auth', authRoutes);
+const productRoutes = require('./routes/productRoutes');
+app.use('/api/products', productRoutes);
 
 // Root route for testing
 app.get('/', (req, res) => {
